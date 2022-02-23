@@ -1,0 +1,17 @@
+# Django
+Django==3.1
+
+# Manage Timezone
+pytz==2021.3
+
+# Base
+psycopg2-binary==2.8
+Pillow==8.4.0
+
+# Testing
+mypy==0.910
+pytest==7.0.1
+
+# Tools
+django-extensions==3.1.5
+django-environ==0.4.5
