@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DJANGO_DEBUG', default=False)
+DEBUG = env('DJANGO_DEBUG')
 
 ALLOWED_HOSTS = tuple(env.list('ALLOWED_HOSTS', default=[]))
 
@@ -32,7 +32,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'products',
+    # APPS
+    'products.apps.ProductsConfig',
 ]
 
 MIDDLEWARE = [
@@ -120,4 +121,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 #STATIC_ROOT = '/code/static/'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
