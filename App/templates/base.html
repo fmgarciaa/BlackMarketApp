@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  {# bootstrap4 framework #}
+  {% load bootstrap4 %}
+ 
+  {# CSS Bootstrap #}
+  {% bootstrap_css %}
+  {% bootstrap_javascript jquery='full' %}
+  {# fILES #}
+  {% load static %} 
+  <title>Products</title>
+</head>
+<body>
+<!--navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">
+    <img src="{% static 'storefront.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+    <b>BlackMarket</b>
+  </a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="navbar-collapse collapse" id="navbarTogglerDemo02" style="">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href=""><img src="/static/ordericon.png" alt="" style="display:inline-block; float:left">Order<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        
+        <a class="nav-link" href="{% url 'product:list' %}"><img src="/static/producticon.png" alt="" style="display:inline-block; float:left">Product</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#"><img src="/static/usericon.png" alt="" style="display:inline-block; float:left">Customer</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#"><img src="/static/routeicon.png" alt="" style="display:inline-block; float:left">Route</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#"><img src="/static/dashboardicon.png" alt="" style="display:inline-block; float:left">Dashboard</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" id="myInput">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<!---->
+{% if messages %}
+  {% for m in messages %}
+    <script>
+      Swal.fire({
+        "title": "Congratulations",
+        "text": "{{m}}",
+        "icon": "success"
+      })
+    </script>
+  {% endfor %}
+{% endif %}
+
+{% if form.errors %}
+  {% for field in form %}
+      {% for error in field.errors %} 
+        <script>
+          Swal.fire({
+            "title": "The product already exists",
+            "text": "{{error}}",
+            "icon": "error"
+          })
+        </script>
+      {% endfor %}
+  {% endfor %}
+{% endif %}
+
+
+ {% block content %}
+ {% endblock  %}
+</body>
+</html>

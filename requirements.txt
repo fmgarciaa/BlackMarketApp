@@ -15,3 +15,7 @@ pytest==7.0.1
 # Tools
 django-extensions==3.1.5
 django-environ==0.4.5
+django-bootstrap4
+django-widget-tweaks
+django-clear-cache
+

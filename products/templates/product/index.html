@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block content %}
+  <!--Create Button-->
+  <div align="left" class="btn_crear mb-1 ml-1 mr-1">
+    <a href="create" type="button" class="btn btn-primary btn-lg btn-block">Create New Product</a>
+  </div>
+<!---->
+<!---->
+<div style="overflow-x:auto;">
+  <table class="table ml-1 table-bordered" id="myTable">
+    <thead class= "thead-dark" style="display:table-header-group">
+      <tr>
+        <th>Nane</th>
+        <th>Precio</th>
+        <th>Unity</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Register date</th>
+        <th>Acctions</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+    <!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'products' y los listamos -->
+    {% for product in object_list %}
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.unity }}</td>
+        <td>{{ product.type }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.register_date }}</td>
+        <td>                    
+            {% csrf_token %}
+            <div class="btn-group">
+
+              <a href="edit/{{product.id}}" title="Editar" type="button" class="btn btn-primary">Editar </a>
+              
+              <button class="btn btn-danger" onclick="return deleteProduct({{product.id}});" type="submit">
+                Eliminar
+              </button>
+              <form action="delete/{{product.id}}" method="POST" id="myForm">{% csrf_token %}</form>
+
+            </div>
+        </td>
+      </tr>
+    {% endfor %}
+   
+    </tbody>
+  </table>
+</div>
+<script>
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tbody tr").filter(function() {
+        $(this).toggle($(this).find("td:first").text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+</script>
+<script type="text/javascript">
+  function deleteProduct(id) {
+    Swal.fire({
+      "title": "Are you sure?",
+      "text": "This action can not be undone",
+      "icon": "question",
+      "showCancelButton": true,
+      "cancelButtonText": "No, cancel",
+      "confirmButtonText": "Yes, delete",
+      "confirmButtonColor": "#dc3545"
+    }).then(resultado => {
+      if (resultado.value) {
+        document.querySelector('#myForm').submit();
+      }else{
+        window.location.href="./";
+      }
+    })
+  }
+</script>
+
+{% endblock  %}
+
