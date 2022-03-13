@@ -2,7 +2,7 @@
 {% block content %}
   <!--Create Button-->
   <div align="left" class="btn_crear mb-1 ml-1 mr-1">
-    <a href="create" type="button" class="btn btn-primary btn-lg btn-block">Create New Product</a>
+    <a href="create" type="button" class="btn btn-primary btn-lg btn-block">Create New Customer</a>
   </div>
 <!---->
 <!---->
@@ -10,36 +10,39 @@
   <table class="table ml-1 table-bordered" id="myTable">
     <thead class= "thead-dark" style="display:table-header-group">
       <tr>
-        <th>Name</th>
-        <th>Precio</th>
-        <th>Unity</th>
-        <th>Type</th>
-        <th>Description</th>
+        <th>Full Name</th>
+        <th>Direction</th>
+        <th>District</th>
+        <th>Reference</th>
+        <th>Phone</th>
+        <th>Frequent</th>
         <th>Register date</th>
         <th>Acctions</th>
       </tr>
     </thead>
     <tbody>
     
-    <!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'products' y los listamos -->
-    {% for product in object_list %}
+    <!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'customers' y los listamos -->
+    {% for customer in object_list %}
       <tr>
-        <td>{{ product.name }}</td>
-        <td>{{ product.price }}</td>
-        <td>{{ product.unity }}</td>
-        <td>{{ product.type }}</td>
-        <td>{{ product.description }}</td>
-        <td>{{ product.register_date }}</td>
+        <td>{{ customer.full_name }}</td>
+        <td>{{ customer.direction }}</td>
+        <td>{{ customer.get_district_display }}</td>
+        <td>{{ customer.reference }}</td>
+        <td>{{ customer.phone_number }}</td>
+        <td>{{ customer.is_regular_client }}</td>
+        <td>{{ customer.register_date }}</td>
+
         <td>                    
             {% csrf_token %}
             <div class="btn-group">
 
-              <a href="edit/{{product.id}}" title="Editar" type="button" class="btn btn-primary">Editar </a>
+              <a href="edit/{{customer.id}}" title="Editar" type="button" class="btn btn-primary">Editar </a>
               
-              <button class="btn btn-danger" onclick="return deleteProduct({{product.id}});" type="submit">
+              <button class="btn btn-danger" onclick="return deletecustomer({{customer.id}});" type="submit">
                 Eliminar
               </button>
-              <form action="delete/{{product.id}}" method="POST" id="myForm">{% csrf_token %}</form>
+              <form action="delete/{{customer.id}}" method="POST" id="myForm">{% csrf_token %}</form>
 
             </div>
         </td>
@@ -58,7 +61,7 @@
     });
 </script>
 <script type="text/javascript">
-  function deleteProduct(id) {
+  function deletecustomer(id) {
     Swal.fire({
       "title": "Are you sure?",
       "text": "This action can not be undone",

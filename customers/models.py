@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.core.exceptions import ValidationError
 
 def phone_validate(value):
-    if len(value) <= 9:
+    if len(value) >= 10:
         raise ValidationError('phone must be 9 max character')
     if not value.isnumeric():
         raise ValidationError('phone must be only number')

@@ -13,7 +13,8 @@
   {% bootstrap_javascript jquery='full' %}
   {# fILES #}
   {% load static %} 
-  <title>Products</title>
+  <title>BlackMarket</title>
+  <link rel="shortcut icon" href="{% static 'storefront.png' %}">
 </head>
 <body>
 <!--navbar-->
@@ -36,7 +37,7 @@
         <a class="nav-link" href="{% url 'product:list' %}"><img src="/static/producticon.png" alt="" style="display:inline-block; float:left">Product</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#"><img src="/static/usericon.png" alt="" style="display:inline-block; float:left">Customer</a>
+        <a class="nav-link" href="{% url 'customer:list' %}"><img src="/static/usericon.png" alt="" style="display:inline-block; float:left">Customer</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="#"><img src="/static/routeicon.png" alt="" style="display:inline-block; float:left">Route</a>

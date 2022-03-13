@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # APPS
     'products.apps.ProductsConfig',
+    'customers.apps.CustomersConfig',
     # TOOLS
     'clear_cache',
     'bootstrap4',
