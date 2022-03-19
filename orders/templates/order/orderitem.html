@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content%}
+<!--Search buuttom-->
+<form class="ml-3 mr-2">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" id="myInput">
+</form>
+<!---->
+<div style="overflow-x:auto;">
+    <table class="table m-1 table-bordered" id="myTable">
+      <thead class= "thead-dark" style="display:table-header-group">
+        <tr>
+          <th>Product</th>
+          <th>Unity</th>
+          <th>Price</th>
+          <th>Accion</th>
+          
+      </thead>
+      <tbody>
+      
+      <!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'orders' y los listamos -->
+      {% for product in object_list %}
+        <tr>
+          <td class="table-active">{{ product.name }}</td>
+          <td>{{ product.unity }}</td>
+          <td>S/.{{ product.price }}</td>
+          <td>
+            <div>
+                <a href="#" type="button" class="btn btn-success">Add</a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}  
+        </tbody>
+    </table>
+</div>
+<script>
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tbody tr").filter(function() {
+          $(this).toggle($(this).find('td:eq(1)').text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+  </script>
+
+{% endblock  %}

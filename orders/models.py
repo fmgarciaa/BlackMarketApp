@@ -28,7 +28,7 @@ class Order(models.Model):
     date = models.DateField()
     status = models.CharField(max_length=13, choices=STATUS_CHOICES, default="Pending")
     pay_method = models.CharField(max_length=12, choices=PAY_CHOICES)
-    bank = models.CharField(max_length=27, choices=BANK_CHOICES, default="None")
+    bank = models.CharField(max_length=27, choices=BANK_CHOICES, default="6")
     total_pay = models.DecimalField(decimal_places=2, max_digits=5, default=0)
     register_date =models.DateTimeField()
 
@@ -37,7 +37,7 @@ class Order(models.Model):
         super(Order, self).save(*args, **kwargs)
 
     class Meta:
-        ordering = ('-id')
+        ordering = ('-id',)
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="orderItems")
@@ -49,3 +49,6 @@ class OrderItem(models.Model):
     def save(self, *args, **kwargs):
         self.register_date = timezone.now()
         super(OrderItem, self).save(*args, **kwargs)
+
+
+

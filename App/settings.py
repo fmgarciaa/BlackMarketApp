@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     # APPS
     'products.apps.ProductsConfig',
     'customers.apps.CustomersConfig',
+    'orders.apps.OrdersConfig',
+
     # TOOLS
     'clear_cache',
     'bootstrap4',

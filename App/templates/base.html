@@ -18,7 +18,7 @@
 </head>
 <body>
 <!--navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
   <a class="navbar-brand" href="#">
     <img src="{% static 'storefront.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
     <b>BlackMarket</b>
@@ -30,7 +30,7 @@
   <div class="navbar-collapse collapse" id="navbarTogglerDemo02" style="">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href=""><img src="/static/ordericon.png" alt="" style="display:inline-block; float:left">Order<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'order:home' %}"><img src="/static/ordericon.png" alt="" style="display:inline-block; float:left">Order<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
         
@@ -46,12 +46,16 @@
         <a class="nav-link" href="#"><img src="/static/dashboardicon.png" alt="" style="display:inline-block; float:left">Dashboard</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" id="myInput">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+  </div>
+  <div>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+          <a class="badge badge-primary" href="#"><img src="/static/shoppingbag.png" alt="">7</a>       
+      </li>
+    </ul>
   </div>
 </nav>
+
 <!---->
 {% if messages %}
   {% for m in messages %}
@@ -70,7 +74,7 @@
       {% for error in field.errors %} 
         <script>
           Swal.fire({
-            "title": "The product already exists",
+            "title": "Opps! There is a problem!",
             "text": "{{error}}",
             "icon": "error"
           })

@@ -53,7 +53,7 @@ class Customers(models.Model):
     register_date = models.DateTimeField()
 
     def __str__(self) -> str:
-        return self.name
+        return self.full_name
     
     def save(self, *args, **kwargs):
         self.register_date = timezone.now()

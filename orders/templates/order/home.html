@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card m-3">
+  <h5 class="card-header"><img src="/static/cartblack.png" alt="">  Create a New Order</h5>
+  <div class="card-body">
+    <p class="card-text">You can create a new order and assign it to a customer.</p>
+    <a href="{% url 'order:orderitem' %}" class="btn btn-primary">New Order</a>
+  </div>
+</div>
+
+<div class="card m-3">
+  <h5 class="card-header"><img src="/static/editblack.png" alt=""> Edit Order</h5>
+  <div class="card-body">
+    <p class="card-text">You cand modify any Order: Add or delete items or delete the order. </p>
+    <a href="{% url 'order:list' %}" class="btn btn-primary">Edit</a>
+  </div>
+</div>
+{% endblock %}
