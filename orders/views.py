@@ -3,8 +3,10 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Order, OrderItem
 from products.models import Product
+from .basket import Basket
 
 from django.urls import reverse
+from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 
@@ -59,3 +61,33 @@ class OrderUpdate(SuccessMessageMixin, UpdateView):
 
 class OrderItem(ListView):
     model=Product
+
+def add_product(request, product_id):
+    basket = Basket(request)
+    product=Product.objects.get(id=product_id)
+
+    basket.add_item(product=product)
+
+    return redirect('product:list')
+
+def delete_product(request, product_id):
+    basket = Basket(request)
+    product=Product.objects.get(id=product_id)
+
+    basket.delete(product=product)
+
+    return redirect('product:list')
+
+def remove_product(request, product_id):
+    basket = Basket(request)
+    product=Product.objects.get(id=product_id)
+
+    basket.remove_item(product=product)
+
+    return redirect('product:list')
+
+def clean_basket(request, product_id):
+    basket = Basket(request)
+
+    basket.clean_basket()
+    return redirect('product:list')
