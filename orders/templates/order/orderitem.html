@@ -13,7 +13,7 @@
           <th>Unity</th>
           <th>Price</th>
           <th>Accion</th>
-          
+        </tr> 
       </thead>
       <tbody>
       
@@ -25,7 +25,7 @@
           <td>S/.{{ product.price }}</td>
           <td>
             <div>
-                <a href="#" type="button" class="btn btn-success">Add</a>
+                <a href="{% url 'cart:add' product.id %}" type="button" class="btn btn-success" id="add" onclick='disable()'>Add</a>
             </div>
           </td>
         </tr>
@@ -40,6 +40,11 @@
           $(this).toggle($(this).find('td:eq(0)').text().toLowerCase().indexOf(value) > -1)
         });
       });
-  </script>
+</script>
+<script>
+  function disable () {
+    
+}
+</script>
 
 {% endblock  %}

@@ -50,7 +50,7 @@
   <div>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-          <a class="badge badge-primary" href="/orders/templates/order/basket.html"><img src="/static/shoppingbag.png" alt="">{{ quantity_items }}</a>       
+          <a class="badge badge-primary" href="{% url 'cart:home' %}"><img src="/static/shoppingbag.png" alt="">{{ items_cart }}</a>       
       </li>
     </ul>
   </div>

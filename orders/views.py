@@ -3,7 +3,9 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Order, OrderItem
 from products.models import Product
-from .basket import Basket
+from cart.cart import Cart
+from customers.models import Customers
+import datetime
 
 from django.urls import reverse
 from django.shortcuts import redirect
@@ -19,8 +21,26 @@ class OrderCreate(SuccessMessageMixin, CreateView):
     fields = ('owner', 'date',  'status', 'pay_method', 'bank')
     success_message="Order created succesfully"
 
+    def get_contetx_data(self, **kwargs):
+        context = super().get_context_data()
+        #luego agregas al contexto lo que desees que vaya a la otra pagina o se use en esta.
+        context['id'] = self.object.id
+        return context
+
     def get_success_url(self):
-        return reverse('order:addItem')
+        return reverse ('order:list')
+    
+    def save_order(request, context):
+        cart=Cart(request)
+        order_id=context
+        for item in cart:
+            OrderItem.objects.create(
+             order=order_id,
+            product=item['name'],
+            quantity=item['quantity'],
+            price=item['price'],
+        )
+
 
 class OrderItemCreate(SuccessMessageMixin, CreateView):
     model = OrderItem
@@ -62,32 +82,16 @@ class OrderUpdate(SuccessMessageMixin, UpdateView):
 class OrderItem(ListView):
     model=Product
 
-def add_product(request, product_id):
-    basket = Basket(request)
-    product=Product.objects.get(id=product_id)
 
-    basket.add_item(product=product)
-
-    return redirect('product:list')
-
-def delete_product(request, product_id):
-    basket = Basket(request)
-    product=Product.objects.get(id=product_id)
-
-    basket.delete(product=product)
-
-    return redirect('product:list')
-
-def remove_product(request, product_id):
-    basket = Basket(request)
-    product=Product.objects.get(id=product_id)
-
-    basket.remove_item(product=product)
-
-    return redirect('product:list')
-
-def clean_basket(request, product_id):
-    basket = Basket(request)
-
-    basket.clean_basket()
-    return redirect('product:list')
+def save_order(request, pk):
+    cart=Cart(request)
+    order_id=pk
+    for item in cart:
+        OrderItem.objects.create(
+            order=order_id,
+            product=item['name'],
+            quantity=item['quantity'],
+            price=item['price'],
+        )
+    
+    return reverse('order:list')
