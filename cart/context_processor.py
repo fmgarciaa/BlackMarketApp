@@ -1,13 +1,11 @@
-def cart_items(request):
-    amount_cart=0
-    items_cart=0
-
+def data_cart(request):
+    total_cart=0
+    total_items=0
     if request.user.is_authenticated:
         for key, value in request.session['cart'].items():
-            amount_cart=amount_cart+float(value['total'])
-            items_cart=items_cart+1
+            total_cart = total_cart + float(value['price'])*value['quantity']
+            total_items= len(request.session['cart'].items())
     return {
-        'amount_cart':amount_cart,
-        'items_cart': items_cart,
-    }        
-
+        'total_cart': total_cart,
+        'total_items': total_items,
+    }

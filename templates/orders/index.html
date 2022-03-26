@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block Title %}All Products{% endblock  %}
+{% block content %}
+
+<div class="container">
+  <div class="pb-3 h1">All Products</div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 mb-4">
+        <input type="text" id="myFilter" class="form-control" onkeyup="myFunction()"
+          placeholder="Search for card name...">
+      </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4" id="myProducts">
+      {% for product in products %}
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><b>{{product.name}}</b></h5>
+            <hr style="height:2px;border-width:1;color:gray;background-color:gray">
+            <span class="card-text"><b>Unit:</b> {{product.unit}}</span><br>
+            <span class="card-text"><b>Price:</b> S/.{{product.price}}</span><br><br>
+            <a href="{% url 'cart:add_item' product.id %}" class="btn btn-primary">Add Cart</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+  <script>
+    $("#myInput").on("keyup", function () {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tbody tr").filter(function () {
+        $(this).toggle($(this).find("td:first").text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  </script>
+  <script type="text/javascript">
+    function deleteProduct(id) {
+      Swal.fire({
+        "title": "Are you sure?",
+        "text": "This action can not be undone",
+        "icon": "question",
+        "showCancelButton": true,
+        "cancelButtonText": "No, cancel",
+        "confirmButtonText": "Yes, delete",
+        "confirmButtonColor": "#dc3545"
+      }).then(resultado => {
+        if (resultado.value) {
+          document.querySelector('#myForm').submit();
+        } else {
+          window.location.href = "./";
+        }
+      })
+    }
+  </script>
+  <script>
+    function myFunction() {
+      var input, filter, cards, cardContainer, title, i;
+      input = document.getElementById("myFilter");
+      filter = input.value.toUpperCase();
+      cardContainer = document.getElementById("myProducts");
+      cards = cardContainer.getElementsByClassName("card");
+      for (i = 0; i < cards.length; i++) {
+        title = cards[i].querySelector(".card-title");
+        if (title.innerText.toUpperCase().indexOf(filter) > -1) {
+          cards[i].style.display = "";
+        } else {
+          cards[i].style.display = "none";
+        }
+      }
+    }
+  </script>
+
+  {% endblock  %}

@@ -1,29 +1,43 @@
-import decimal
 from django.db import models
-from django.utils import timezone
-from django.core.validators import MinValueValidator
+from django.contrib.auth.models import User
 
-TYPE_CHOICES = (
-        ('Natys Juane', 'Natys Juane'),
-        ('Natys Bakery', 'Natys Bakery'),
-        ('Natys Coffe', 'Natys Coffe'),
-    )
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True)
 
+    class Meta:
+        verbose_name_plural = 'categories'
 
-class Product(models.Model):
-    name = models.CharField(max_length=170, unique=True, blank=False)
-    description = models.TextField(max_length=200)
-    type = models.CharField(max_length=170 ,choices=TYPE_CHOICES, default="Natys Juane")
-    unity = models.CharField(max_length=170)
-    price = models.DecimalField(decimal_places=2, max_digits=12, validators=[MinValueValidator(decimal.Decimal('0.01'))])
-    register_date = models.DateTimeField()
+    def __str__(self) -> str:
+        return self.name
+
+class Unit(models.Model):
+    name=models.CharField(max_length=255)
+    slug=models.SlugField(max_length=255, unique=True)
+
+    class Meta:
+        verbose_name_plural = 'units'
 
     def __str__(self) -> str:
         return self.name
     
-    def save(self, *args, **kwargs):
-        self.register_date = timezone.now()
-        super(Product, self).save(*args, **kwargs)
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    unit = models.ForeignKey(Unit, on_delete=models.CASCADE )
+    category = models.ForeignKey(Category, related_name='product', on_delete=models.CASCADE)
+    description = models.TextField(blank=True)
+    create_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=255, unique=True)
+    in_stock = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ('-id',)
+        verbose_name_plural = 'Products'
+        ordering = ('-created',)
+
+    def __str__(self):
+        return self.name
+    

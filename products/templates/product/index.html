@@ -1,58 +1,6 @@
-{% extends 'xd.html' %}
+{% extends 'base.html' %}
 {% block content %}
-  <!--Create Button-->
-  <div align="left" class="btn_crear mb-1 ml-1 mr-1">
-    <a href="create" type="button" class="btn btn-primary btn-lg btn-block">Create New Product</a>
-  </div>
-<!---->
-<form class="m-2">
-  <input class="form-control mr-sm-2" type="search" placeholder="Search" id="myInput">
-</form>
-<!---->
-<!---->
-<div style="overflow-x:auto;">
-  <table class="table ml-1 table-bordered" id="myTable">
-    <thead class= "thead-dark" style="display:table-header-group">
-      <tr>
-        <th>Name</th>
-        <th>Precio</th>
-        <th>Unity</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Register date</th>
-        <th>Acctions</th>
-      </tr>
-    </thead>
-    <tbody>
-    
-    <!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'products' y los listamos -->
-    {% for product in object_list %}
-      <tr>
-        <td>{{ product.name }}</td>
-        <td>{{ product.price }}</td>
-        <td>{{ product.unity }}</td>
-        <td>{{ product.type }}</td>
-        <td>{{ product.description }}</td>
-        <td>{{ product.register_date }}</td>
-        <td>                    
-            {% csrf_token %}
-            <div class="btn-group">
-
-              <a href="edit/{{product.id}}" title="Editar" type="button" class="btn btn-primary">Editar </a>
-              
-              <button class="btn btn-danger" onclick="return deleteProduct({{product.id}});" type="submit">
-                Eliminar
-              </button>
-              <form action="delete/{{product.id}}" method="POST" id="myForm">{% csrf_token %}</form>
-
-            </div>
-        </td>
-      </tr>
-    {% endfor %}
-   
-    </tbody>
-  </table>
-</div>
+ 
 <script>
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();

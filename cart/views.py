@@ -1,43 +1,39 @@
 from django.shortcuts import render
-from products.models import Product
 from django.shortcuts import redirect
-from .cart import Cart
 
+from .cart import Cart
+from products.models import Product
+
+def cart_summary(request):
+    return render(request, 'cart/summary.html')
 
 def add_product(request, product_id):
     cart = Cart(request)
-    product=Product.objects.get(id=product_id)
-
+    product = Product.objects.get(id=product_id)
     cart.add_item(product=product)
+    return redirect("order:create")
 
-    return redirect('order:orderitem')
+def increase_quantity(request, product_id):
+    cart = Cart(request)
+    product = Product.objects.get(id=product_id)
+    cart.add_item(product=product)
+    return redirect("cart:cart_summary")
+
 
 def delete_product(request, product_id):
     cart = Cart(request)
-    product=Product.objects.get(id=product_id)
-
-    cart.delete(product=product)
-
-    return redirect('cart:home')
+    product = Product.objects.get(id=product_id)
+    cart.delete_item(product=product)
+    return redirect("cart:cart_summary")
 
 def remove_product(request, product_id):
     cart = Cart(request)
-    product=Product.objects.get(id=product_id)
-
+    product = Product.objects.get(id=product_id)
     cart.remove_item(product=product)
+    return redirect("cart:cart_summary")
 
-    return redirect('cart:home')
-
-def clean_cart(request, product_id):
+def clear_cart(request, product_id):
     cart = Cart(request)
-
     cart.clean_cart()
-    return redirect('cart:home')
+    return redirect("cart:cart_summary")
 
-def sum_product(request, product_id):
-    cart = Cart(request)
-    product=Product.objects.get(id=product_id)
-
-    cart.add_item(product=product)
-
-    return redirect('cart:home')

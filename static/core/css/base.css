@@ -25,10 +25,10 @@
 
 
 /* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 html, body, p, div{
     letter-spacing: -0.02px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 .fs12{
     font-size: 12px;
@@ -108,3 +108,21 @@ html, body, p, div{
 .footer > div > div > ul > li{
     padding-bottom:8px;
 }
+
+.badge span {
+    background-color: rgb(44, 62, 80 );
+    width: 60px;
+    height: 25px;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    display: flex;
+    color: rgb(254, 216, 93);
+    justify-content: center;
+    align-items: center
+}
+
+thead {
+    color: #ffffff;
+    background: #4FC3A1;
+}
+
