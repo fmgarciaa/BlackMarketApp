@@ -1,14 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block Title %}All Products{% endblock  %}
+{% block title %}All Products{% endblock  %}
 {% block content %}
 
 <div class="container">
     <div class="pb-3 h1">All Products</div>
     <div class="container">
+      <div class="row">
+          <a href="" class="btn btn-primary">Create New Product</a>
+      </div>
         <div class="row">
           <form class="m-2">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" id="myInput">
+            <input class="form-control" type="search" placeholder="Search" id="myInput">
           </form>
         </div>
         <div class="table-responsive">

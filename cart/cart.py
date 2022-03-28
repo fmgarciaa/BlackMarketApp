@@ -1,16 +1,16 @@
 
 class Cart:
-    """
-    A base cart class, providing some default behaviors that
-    can be inherited or overrided, as necessary.
-    """
-
+   
     def __init__(self, request):
-        self.session = request.session
-        cart = self.session.get('skey')
-        if 'skey' not in request.session:
-            cart = self.session['skey'] = {}
-        self.cart = cart
+    
+        self.request=request
+        self.session=request.session
+        cart=self.session.get('cart')
+        if 'cart' not in self.session:
+            cart=self.session['cart']={}
+        else:
+            self.cart=cart
+
 
     def add_item(self, product):
         if(str(product.id) not in self.cart.keys()):
@@ -48,6 +48,7 @@ class Cart:
         self.save_cart()
 
     def clean_cart(self):
-        self.session['cart']={}
+        self.session['cart'] = {}
         self.session.modified = True
+       
 
