@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}All Products{% endblock  %}
+{% block content %}
+
+<div class="container">
+    <div class="pb-3 h1">Update Products</div>
+    <div class="container">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% load widget_tweaks %}
+            <!-- {{ form.as_p }} -->
+            <div class="form-group m-3">
+              <label for="name" class="txt_negrita"><b>Name</b></label>
+              {{ form.name|add_class:"form-control" }}
+            </div>
+            <div class="form-group m-3">
+              <label for="precio" class="txt_negrita"><b>Price</b></label>
+              {{ form.price|add_class:"form-control" }}
+            </div>
+            <div class="form-group m-3">
+              <label for="unit" class="txt_negrita"><b>Unity</b></label>
+              {{ form.unit|add_class:"form-control" }}
+            </div>
+            <div class="form-group m-3">
+                <label for="category" class="txt_negrita"><b>Type</b></label>
+                {{ form.category|add_class:"form-control" }}
+            </div>
+            <div class="form-group m-3">
+                <label for="stock" class="txt_negrita"><b>Description</b></label>
+                {{ form.description|add_class:"form-control" }}
+            </div>
+            <div class="col text-center">
+                <button type="submit" class="btn btn-success">Update</button>
+                <a href="{% url 'product:index' %}" type="submit" class="btn btn-danger">Cancel</a>
+                </form>
+            </div>  
+          </form>
+    </div>
+</div>
+
+
+{% endblock  %}

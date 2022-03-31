@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Products{% endblock  %}
+{% block content %}
+
+<div class="container">
+    <div class="pb-3 h1">Create New Product</div>
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            {% load widget_tweaks %}    
+            <div class="form-group m-3">
+              <label for="name" class="txt_negrita"><b>Name</b></label>
+              {{ form.name|add_class:"form-control" }}
+            </div>
+            <div class="form-group m-3">
+              <label for="price" class="txt_negrita"><b>Price</b></label>
+              {{ form.price|add_class:"form-control" }} 
+            </div>
+            <div class="form-group m-3">
+              <label for="unit" class="txt_negrita"><b>Unity</b></label>
+              {{ form.unit|add_class:"form-control" }}
+            </div>
+            <div class="form-group m-3">
+              <label for="category" class="txt_negrita"><b>Type</b></label>
+              {{ form.category|add_class:"form-control" }}
+            </div>
+            <div class="form-group m-3">
+                <label for="category" class="txt_negrita"><b>Type</b></label>
+                {{ form.create_by|add_class:"form-control" }}
+              </div>
+            <div class="form-group m-3">
+                <label for="description" class="txt_negrita"><b>Description</b></label>
+                {{ form.description|add_class:"form-control" }}
+              </div>
+          <div class="col text-center">
+          <button type="submit" class="btn btn-success m3">Save</button>
+          <a href="{% url 'product:index' %}" type="submit" class="btn btn-danger">Cancel</a>
+          </form>
+    </div>
+</div>
+
+
+{% endblock  %}
