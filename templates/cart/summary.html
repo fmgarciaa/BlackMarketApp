@@ -22,6 +22,7 @@
                 <tbody>
                     {% if request.session.cart.items %}
                     {% for key, value in request.session.cart.items %}
+                    {% if not key == 'is_modify' and not key == 'id_update' %}
                     <tr>
                         <td data-th="Product">
                             <div class="row">
@@ -68,6 +69,7 @@
         </td>
         </tr>
         <tr>
+            {% endif %}
             {% endfor %}
             {% else %}
         <tr>
@@ -107,16 +109,24 @@
     </div>
 </div>
 <div class="row mt-4 d-flex align-items-center">
+    
+    {% if request.session.cart.is_modify == True %}
+    <div class="col-sm-6 order-md-2 text-right">
+        <a href="{% url 'order:modify' %}" class="btn btn-danger mb-4 btn-lg pl-5 pr-5">Modify</a>
+    </div>
+    
+    {% else %}
     <div class="col-sm-6 order-md-2 text-right">
         <a href="{% url 'order:checkout' %}" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Checkout</a>
     </div>
+    {% endif %}
+
     <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
         <a href="{% url 'order:create' %}">
             <i class="fas fa-arrow-left mr-2"></i> Continue Shopping</a>
     </div>
 </div>
 </div>
-{% else %}
 <br>
 {% endif %}
 

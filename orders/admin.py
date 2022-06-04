@@ -1,6 +1,7 @@
 from csv import list_dialects
 from django.contrib import admin
 from .models import Order, OrderItem
+from .forms import OrderForm
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):

@@ -10,7 +10,7 @@ class Order(models.Model):
     date = models.DateField()
     pay_method = models.CharField(max_length=255)
     bank = models.CharField(max_length=255)
-    total_pay = models.DecimalField(decimal_places=2, max_digits=5, blank=True)
+    total_pay = models.DecimalField(decimal_places=2, max_digits=8, blank=True)
     status = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -35,6 +35,9 @@ class OrderItem(models.Model):
     class Meta:
         verbose_name_plural = 'orderitems'
         ordering = ('-created',)
+
+    # def __str__(self) -> str:
+    #     return str(f'{self.product}, {self.quantity}')
 
     
 

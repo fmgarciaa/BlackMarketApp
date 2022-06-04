@@ -1,24 +1,25 @@
 
 class Cart:
-   
     def __init__(self, request):
-    
         self.request=request
         self.session=request.session
         cart=self.session.get('cart')
+
         if 'cart' not in self.session:
-            cart=self.session['cart']={}
+            cart=self.session['cart']={
+                'is_modify': False,
+            }
         else:
             self.cart=cart
+    
 
-
-    def add_item(self, product):
+    def add_item(self, product, qty=1):
         if(str(product.id) not in self.cart.keys()):
             self.cart[product.id] = {
                 'product_id': product.id,
                 'name': product.name,
                 'price': str(product.price),
-                'quantity': 1,
+                'quantity': qty,
                 'unit':str(product.unit),
             }
         else:
@@ -28,16 +29,19 @@ class Cart:
                     break
         self.save_cart()
 
+
     def save_cart(self):
         self.session['cart'] = self.cart
         self.session.modified=True
+
 
     def delete_item(self, product):
         product.id = str(product.id)
         if product.id in self.cart:
             del self.cart[product.id]
             self.save_cart()
-    
+
+
     def remove_item(self, product):
         for key, value in self.cart.items():
             if key == str(product.id):
@@ -47,8 +51,11 @@ class Cart:
                 break
         self.save_cart()
 
+
     def clean_cart(self):
         self.session['cart'] = {}
         self.session.modified = True
-       
+
+
+
 

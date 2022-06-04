@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Products{% endblock  %}
+{% block content %}
+{% load widget_tweaks %}
+<div class="container">
+  <div class="pb-3 h1">Modify Order</div>
+  <div class="container">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% load widget_tweaks %}
+      <!-- {{ form.as_p }} -->
+      <div class="form-group m-3">
+        <label for="customer" class="txt_negrita"><b>Customer</b></label>
+        {{ form.customer|add_class:"form-control" }}
+      </div>
+      <div class="form-group m-3">
+        <label for="precio" class="txt_negrita"><b>Date</b></label>
+        {{ form.date|add_class:"form-control" }}
+      </div>
+      <div class="form-group m-3">
+        <label for="stock" class="txt_negrita"><b>Pay Method</b></label>
+        {{ form.pay_method|add_class:"form-control" }}
+      </div>
+      <div class="form-group m-3">
+        <label for="stock" class="txt_negrita"><b>Bank</b></label>
+        {{ form.bank|add_class:"form-control" }}
+      </div>
+      <div class="form-group m-3">
+        <label for="stock" class="txt_negrita"><b>Total Pay</b></label>
+        {{ form.total_pay|add_class:"form-control" }}
+      </div>
+      <div class="col text-center">
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="{% url 'order:list' %}" type="submit" class="btn btn-danger">Cancel</a>
+    </form>
+  </div>
+  </form>
+  <a class="btn btn-primary btn-lg" href="{% url 'order:items_update' order.id %}" role="button">Modify items</a>
+</div>
+</div>
+
+{% endblock  %}

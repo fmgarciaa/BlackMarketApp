@@ -3,7 +3,7 @@
 {% block title %}All Products{% endblock  %}
 {% block content %}
 
-<div class="container">
+{% comment %} <div class="container"> {% endcomment %}
     <div class="pb-3 h1">All Products</div>
     <div class="container">
       <div class="row">
@@ -57,7 +57,7 @@
           </table>
         </div>
     
-</div>
+{% comment %} </div> {% endcomment %}
 <script>
     $("#myInput").on("keyup", function() {
       var value = $(this).val().toLowerCase();
