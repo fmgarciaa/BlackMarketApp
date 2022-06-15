@@ -73,7 +73,6 @@ def update_items(request, id):
     cart.cart['is_modify'] = True
     cart.cart['id_update'] = id
     items = OrderItem.objects.filter(order=id).values_list()
-    print(len(items))
     for item in items:
         product = Product.objects.get(id=item[2])
         cart.add_item(product=product, qty=item[3])

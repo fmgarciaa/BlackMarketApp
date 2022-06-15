@@ -25,12 +25,10 @@
                     {% if not key == 'is_modify' and not key == 'id_update' %}
                     <tr>
                         <td data-th="Product">
-                            <div class="row">
                                 <div class="col-md-9 text-left mt-sm-2">
                                     <h5><b>{{value.name}}</b></h5>
                                     <p class="font-weight-light" style="color:grey;">{{value.unit}}</p>
                                 </div>
-                            </div>
                         </td>
 
                         <td data-th="Price">${{value.price}}</td>

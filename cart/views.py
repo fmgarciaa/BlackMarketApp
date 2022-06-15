@@ -5,8 +5,7 @@ from .cart import Cart
 from products.models import Product
 
 def cart_summary(request):
-    print(request.session['cart'])
-    
+    request.session['cart']
     return render(request, 'cart/summary.html')
 
 def add_product(request, product_id):
