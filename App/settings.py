@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'cart.apps.CartConfig',
     'route.apps.RouteConfig',
+    'dashboards.apps.DashboardsConfig',
 
     # TOOLS
     'clear_cache',

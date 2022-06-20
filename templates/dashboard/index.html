@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Route{% endblock  %}
+{% block content %}
+<div class="container">
+  <form method="POST">
+    {% csrf_token %}
+    {% load widget_tweaks %}
+    <div>
+      <label id='otro'>
+        Select date:
+        <input type="date" name="party" min="2000-01-01" max="2025-04-20" id="date"required>
+        <span class="validity"></span>
+      </label>
+    </div>
+    <button type="submit" class="btn btn-primary m3">Generate</button>
+    <button type="submit" class="btn btn-info m3">Print</button>
+  </form>
+  <div class="table-responsive">
+    <table class="table" id="myTable">
+      <thead>
+        <th>Producto</th>
+        <th>Cantida</th>
+      </thead>
+      <tbody>
+        {% for key, values in data.items %}
+        <tr>
+          <td>{{values.product }}</td>
+          <td>{{values.quantity }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock  %}
