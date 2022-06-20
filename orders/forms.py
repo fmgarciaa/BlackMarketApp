@@ -23,6 +23,7 @@ class OrderForm(forms.ModelForm):
     date = forms.DateField()
     pay_method = forms.CharField(max_length=27, widget=forms.Select(choices=PAY_METHOD_CHOICES))
     bank = forms.CharField(max_length=27, widget=forms.Select(choices=BANK_CHOICES))
+    status = forms.BooleanField(required=False)
     total_pay = forms.DecimalField(decimal_places=2, max_digits=7)
 
 
@@ -33,6 +34,7 @@ class OrderForm(forms.ModelForm):
             'date',
             'pay_method',
             'bank',
+            'status',
             'total_pay',
         ]
 

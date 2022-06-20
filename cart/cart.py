@@ -4,9 +4,8 @@ class Cart:
         self.request=request
         self.session=request.session
         cart=self.session.get('cart')
-
         if 'cart' not in self.session:
-            cart=self.session['cart']={
+            self.cart=self.session['cart']={
                 'is_modify': False,
             }
         else:
@@ -55,6 +54,7 @@ class Cart:
     def clean_cart(self):
         self.session['cart'] = {}
         self.session.modified = True
+
 
 
 

@@ -68,7 +68,7 @@ def some_view(request, id):
     gravada = float(total_order)/1.18
     igv = gravada*0.18
     p.drawString(h_items, v_items2, '---------------------------------------------------------')  
-    p.drawRightString(h_items+100, v_items2-10, 'OP.NOGRAVADA' )
+    p.drawRightString(h_items+100, v_items2-10, 'OP.GRAVADA' )
     p.drawRightString(h_items+110, v_items2-10, 'S/' )
     p.drawString(h_items+130, v_items2-10, str(round(gravada,2)))
 

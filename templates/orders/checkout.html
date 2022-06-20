@@ -31,6 +31,10 @@
         <label for="description" class="txt_negrita"><b>Total Pay</b></label>
         {{ form.total_pay|add_class:"form-control" }}
       </div>
+      <div class="form-group m-3">
+        <label for="type" class="txt_negrita"><b>Cancelado</b></label>
+          {{ form.status|add_class:"form-checkbox"}}
+      </div>
       <div class="col text-center">
         <button type="submit" class="btn btn-success m3">Save</button>
         <a href="{% url 'customer:list' %}" type="submit" class="btn btn-danger">Cancel</a>

@@ -21,7 +21,6 @@ def checkout_order(request):
     context = {}
     data = data_cart(request)
     form = OrderForm(request.POST or None, initial={'total_pay':round(data['total_cart'],2)})
-    
     if form.is_valid():
         note = form.save()
         form.save()
@@ -62,7 +61,7 @@ class OrderDelete(SuccessMessageMixin, DeleteView):
 class UpdateOrder(SuccessMessageMixin, UpdateView):
     model = Order
     form = Order
-    fields=('customer', 'date', 'pay_method', 'bank', 'total_pay')
+    fields=('customer', 'date', 'pay_method', 'bank', 'status', 'total_pay' )
     success_message = 'Updated order successfully!'
 
     def get_success_url(self):

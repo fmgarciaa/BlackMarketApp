@@ -126,3 +126,7 @@ thead {
     background: #4FC3A1;
 }
 
+form-checkbox {
+    width: 80px;
+    height: 100px;
+}

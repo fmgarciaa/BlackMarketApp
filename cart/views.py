@@ -9,9 +9,9 @@ def cart_summary(request):
     return render(request, 'cart/summary.html')
 
 def add_product(request, product_id):
-    cart = Cart(request)
-    product = Product.objects.get(id=product_id)
-    cart.add_item(product=product)
+    basket = Cart(request)
+    product = Product.objects.filter(id=product_id).first()
+    basket.add_item(product=product)
     return redirect("order:create")
 
 def increase_quantity(request, product_id):
